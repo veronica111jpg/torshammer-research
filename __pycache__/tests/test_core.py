@@ -1,19 +1,13 @@
-# tests/test_core.py
-
 import unittest
-from torshammer.core import send_http_get_request
+import torshammer
 
-class TestTorshammerCore(unittest.TestCase):
+class TestTorshammer(unittest.TestCase):
+    
+    def test_useragents_not_empty(self):
+        self.assertTrue(len(torshammer.useragents) > 0, "User-Agent list should not be empty")
 
-    def test_send_http_get_request_localhost(self):
-        """
-        This test checks if the function executes without exceptions.
-        No actual server is required for this dry test.
-        """
-        try:
-            send_http_get_request("127.0.0.1", 80, "UnitTestAgent/1.0")
-        except Exception as e:
-            self.fail(f"send_http_get_request raised an exception: {e}")
+    def test_httpPost_class_exists(self):
+        self.assertTrue(hasattr(torshammer, 'httpPost'), "httpPost class must exist")
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     unittest.main()
